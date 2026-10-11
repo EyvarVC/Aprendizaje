@@ -1,0 +1,14 @@
+﻿## .NET
+bin/
+obj/
+[Dd]ebug/
+[Rr]elease/
+*.user
+
+## IDE
+.vs/
+.vscode/
+.idea/
+
+## Secretos
+.env
