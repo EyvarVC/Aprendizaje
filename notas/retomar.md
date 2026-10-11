@@ -1,65 +1,118 @@
 # Punto de corte de sesion
 
-> Este archivo es un "guardar partida". Lo actualizas antes de dejar la
-> computadora y mañana solo le dices al agente que lo lea.
+> Este archivo es tu "guardar partida". Lo actualizas antes de dejar la
+> computadora y al volver solo le dices al agente que lo lea.
 
 ---
 
-## Como se usa
+## COMO RETOMAR
 
-**Al terminar una sesion:**
-1. Rellena la seccion de abajo
-2. `git add . && git commit -m "wip: puntos de corte"`
-
-**Al empezar una sesion nueva:**
+**Sesion nueva, una sola frase:**
 > "Lee `notas/progreso.md` y `notas/retomar.md`, continuamos desde donde quedamos"
 
+**Antes de dejar la computadora:**
+1. Edita la seccion "Donde estoy" / "Lo siguiente" de este archivo
+2. En la terminal: `git add . && git commit -m "wip: puntos de corte"`
+
+La sesion de chat no importa. Los archivos son la memoria.
+
 ---
 
-## Estado actual
+## Estado: 2026-10-11 (tarde)
 
-**Fecha:** 2026-10-11
-**Fase:** Fase 0 completada
-**Ruta:** C# / ASP.NET Core -> Web moderna
+**Fase:** Fase 0 COMPLETADA. Entrando a Fase 1.
+**Ruta:** C# / ASP.NET Core -> Web moderna (8 semanas)
 
-### Donde estoy
-- Entorno completo: .NET SDK 10.0.401, Git 2.55.0, Docker 29.8.2
+### Donde estoy exactamente
+
+**Completado y verificado:**
+- .NET SDK **10.0.401**
+- Git **2.55.0.windows.5** (config global: Eyvar / gmail / rama main)
+- Docker **29.8.2** (`docker ps` vacio = OK)
+- Visual Studio **2026 (v18)**
+- SQL Server Management Studio **22**
+- VS Code **1.141.0** + extension **C# Dev Kit** + sesion iniciada con GitHub
 - Solucion `Inventario.slnx` creada
-- Proyecto `Inventario.Tests` con xUnit funcionando (1 test de ejemplo pasa)
-- `.gitignore` configurado correctamente
-- Visual Studio 2026 (v18) + SSMS 22 disponibles
+- Proyecto `Inventario.Tests` con xUnit funcionando
+- `.gitignore` funcionando (verificado: no aparecen bin/ ni obj/)
+- **2 commits** en git
 
-### Lo siguiente (en orden)
-1. Verificar que el primer commit existe (`git log --oneline`)
-2. Ejercicio Fase 1: `CalculadoraPrecios` con ciclo test rojo -> verde
-3. Practicar git: ramas, diff, revert
+**PENDIENTE - nada de esto se ha ejecutado todavia:**
+- [ ] Crear `Inventario.Core` (libreria de clase)
+- [ ] Conectar `Inventario.Tests` -> `Inventario.Core`
+- [ ] Escribir el test rojo de `CalculadoraPrecios`
+- [ ] Verificar que el test FALLA
+- [ ] Pedir implementacion al agente
+- [ ] Verificar que el test PASA
 
-### Decisiones tomadas
-- **NO instalar VS Code por ahora.** Visual Studio es mejor para .NET/Blazor.
-  VS Code se considera en la Fase 4 (TypeScript/React).
-- **Un solo repositorio**: el proyecto y la guia de aprendizaje viven juntos.
-- **Empezar por los tests** (test en rojo primero), no por el codigo.
-- **Fase 2 usara Docker** para SQL Server: `mcr.microsoft.com/mssql/server:2025-latest`
-  (la version 2025 es necesaria para busqueda vectorial con EF Core 10).
+### Lo siguiente: paso a paso
 
-### Pendiente de decidir
-- Version del contenedor de SQL Server para la Fase 2
-- Si la UI de la Fase 3 va en Blazor o se invierte con React
+**Paso 1** (en la terminal de VS Code, `Ctrl+`` ):
+```powershell
+dotnet new classlib -o Inventario.Core
+dotnet sln Inventario.slnx add Inventario.Core\Inventario.Core.csproj
+dotnet add Inventario.Tests\Inventario.Tests.csproj reference Inventario.Core\Inventario.Core.csproj
+```
 
-### Errores que me han pasado (para no repetirlos)
-- `winget upgrade` falla si el paquete no fue instalado por winget -> usar `install`
-- `dotnet --list-sdks` mostrando varias versiones es NORMAL (side-by-side)
-- `docker ps` vacio = Docker funcionando correctamente
+**Paso 2:** abrir `Inventario.Tests\UnitTest1.cs`, borrar todo y pegar el
+contenido que esta en `notas/Ejercicio1-Calculadora.md` (test con 5 escenarios).
+
+**Paso 3:** `dotnet test` -> DEBE FALLAR. ese error es el objetivo.
+
+**Paso 4:** pedirle al agente que implemente `CalculadoraPrecios`.
+
+**Paso 5:** `dotnet test` -> debe pasar.
+
+**Paso 6:** `git add . && git commit -m "feat: calculadora de precios con tests"`
 
 ---
 
-## Como esta mi relacion con los agentes
+### Decisiones tomadas (no volver a preguntar)
+- **NO instalar mas editores.** Visual Studio para .NET/Blazor. VS Code ya
+  instalado para notas + terminal + TypeScript en Fase 4.
+- **Un solo repositorio**: proyecto + guia de aprendizaje + notas juntos.
+- **Siempre test primero** (test rojo antes de implementar). El agente
+  implementa TU diseño, no el suyo.
+- **Fase 2 usara Docker** con `mcr.microsoft.com/mssql/server:2025-latest`
+  (necesario para busqueda vectorial con EF Core 10).
 
-Nivel actual: **Nivel 2 (colaboracion basica)** - en progreso.
+### Errores ya que me han pasado
+- `winget upgrade` falla si el paquete no lo instalo winget -> usar `install`
+- `dotnet --list-sdks` con varias versiones es NORMAL (side-by-side)
+- `docker ps` vacio = funcionando bien
+- Avisos de "LF will be replaced by CRLF" en git = normal en Windows
 
-Disciplina que me funciona: pedir siempre la salida real del comando, nunca
-aceptar "los tests pasan" sin ver `dotnet test` ejecutandose.
+### Disciplina con agentes
+Nivel actual: **2 (colaboracion basica)**.
 
-Ejercicio pendiente del Nivel 1: pedirle a un agente que ejecute un comando y
-pegue la salida. Si dice que pasa sin ejecutar, es que necesita una regla en
-`AGENTS.md`.
+Regla que me esta funcionando: **siempre pedir la salida real del comando.**
+Nunca aceptar "los tests pasan" sin ver `dotnet test` ejecutandose.
+
+Ejercicio pendiente del Nivel 1: cuando el agente implemente `CalculadoraPrecios`,
+comprobar si ejecuta `dotnet test` o si solo dice que pasa.
+
+---
+
+## Atajos utiles
+
+| Atajo | Que hace |
+|---|---|
+| `Ctrl+`` ` `` | Terminal integrada |
+| `Ctrl+Shift+P` | Paleta de comandos (busca aqui si no encuentras algo) |
+| `Ctrl+Shift+V` | Preview de Markdown |
+| `Ctrl+K V` | Markdown lado a lado |
+| `Ctrl+Shift+E` | Explorador |
+| `Ctrl+Shift+G` | Panel de Git |
+| `Alt+Z` | Ajustar linea a pantalla |
+
+## Comandos que uso seguido
+
+```powershell
+cd D:\Eyvar\PruebasIA\Aprendizaje
+dotnet test                    # correr tests
+dotnet test --filter "Nombre"  # correr un solo test
+git log --oneline              # historial
+git status                     # cambios pendientes
+git diff                       # ver cambios linea por linea
+git switch -c rama-nueva       # crear rama
+```

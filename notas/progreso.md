@@ -25,17 +25,16 @@ de la guia dice: "lo importante se escribe en archivos, no en el chat".
 
 ## RETOMAR AQUI
 
-**Estado:** Fase 0 COMPLETADA. Entorno verificado y funcionando.
+**Estado:** Fase 0 COMPLETADA + VS Code configurado. Entorno 100% operativo.
 
-**Ultima accion:** primer commit de la solucion + tests (creando).
+**Ultima accion:** VS Code con C# Dev Kit instalado y verificado. `dotnet test`
+corre dentro de la terminal integrada.
 
 **Siguiente paso concreto:**
-1. Verificar el commit: `git log --oneline` debe mostrar la linea del commit
-   inicial.
-2. **Ejercicio de la Fase 1 (test rojo -> verde).** Crear `CalculadoraPrecios`
-   escribiendo PRIMERO el test que falla, luego la implementacion.
-3. Practicar Git basico: `git status`, `git diff`, `git switch -c`,
-   `git revert`.
+1. Crear el proyecto `Inventario.Core` (libreria de clase) y conectarlo a los tests
+2. **Ejercicio de la Fase 1 (test rojo -> verde).** Escribir PRIMERO el test que
+   falla, despues pedirle al agente la implementacion.
+3. Practicar Git basico: `git status`, `git diff`, `git switch -c`, `git revert`.
 
 **Comandos utiles:**
 ```powershell
@@ -72,6 +71,8 @@ git status               # ver cambios pendientes
 | 2026-10-11 | 0 | Instalacion Git 2.55.0 + config global | OK | Elegir "Git from the command line" en el PATH |
 | 2026-10-11 | 0 | Instalacion Docker Desktop 29.8.2 | OK, requirio reinicio | `docker ps` vacio = funcionando |
 | 2026-10-11 | 0 | Verificacion final del entorno | 4/4 OK | - |
+| 2026-10-11 | 0 | VS Code 1.141.0 + C# Dev Kit + GitHub signin | OK | Terminal integrada `dotnet test` funciona |
+| 2026-10-11 | 1 | Preparacion ejercicio test rojo -> verde | Listo, sin ejecutar | Documentado en notas/Ejercicio1-Calculadora.md |
 
 ## Aprendido en Fase 0
 
