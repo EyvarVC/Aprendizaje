@@ -2,6 +2,54 @@
 
 Tu mapa de referencia real. Esta tabla vale mas que cualquier curso.
 
+---
+
+## COMO RETOMAR ESTE TRABAJO
+
+Si estas en una sesion nueva, el unico comando que necesitas es este:
+
+> **"Lee `notas/progreso.md` y `notas/retomar.md`, y continuamos desde donde quedamos."**
+
+Esos dos archivos contienen todo el estado del proyecto: donde vas, que falta,
+el ultimo comando que corriste, y el error que te tropece.
+
+La sesion de chat no importa. Los archivos son la memoria. Por eso el Nivel 1
+de la guia dice: "lo importante se escribe en archivos, no en el chat".
+
+**Antes de dejar la computadora, siempre:**
+1. Actualiza la seccion "Retomar aqui" de abajo
+2. `git add . && git commit -m "wip: puntos de corte"`
+3. Listo. Mañana retomas con una frase.
+
+---
+
+## RETOMAR AQUI
+
+**Estado:** Fase 0 COMPLETADA. Entorno verificado y funcionando.
+
+**Ultima accion:** primer commit de la solucion + tests (creando).
+
+**Siguiente paso concreto:**
+1. Verificar el commit: `git log --oneline` debe mostrar la linea del commit
+   inicial.
+2. **Ejercicio de la Fase 1 (test rojo -> verde).** Crear `CalculadoraPrecios`
+   escribiendo PRIMERO el test que falla, luego la implementacion.
+3. Practicar Git basico: `git status`, `git diff`, `git switch -c`,
+   `git revert`.
+
+**Comandos utiles:**
+```powershell
+cd D:\Eyvar\PruebasIA\Aprendizaje
+dotnet test              # correr tests
+git log --oneline        # ver historial
+git status               # ver cambios pendientes
+```
+
+**Armas utiles:** `dotnet new sln | xunit | classlib | console`,
+`dotnet add reference`, `dotnet sln add`, `dotnet test --filter`.
+
+---
+
 ## Estado del entorno
 
 | Componente | Estado | Version |
